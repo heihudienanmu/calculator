@@ -1,0 +1,117 @@
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+import tkinter
+from tkinter import *
+from tkinter import messagebox
+
+calcu=Tk()
+calcu.minsize(270,260)
+calcu.title("十以内模拟计算器")
+
+#显示label
+text_show=IntVar()
+cal_text=Entry(calcu,textvariable=text_show,justify='right',bg='grey')
+cal_text.place(x=10,y=10,width=250,height=30)
+#cal_text.configure(state='readonly')
+
+data_num=[]
+op=['*']
+
+def str_data1():
+    text_show.set('1')
+def str_data2():
+    text_show.set('2')
+def str_data3():
+    text_show.set('3')
+def str_data4():
+    text_show.set('4')
+def str_data5():
+    text_show.set('5')
+def str_data6():
+    text_show.set('6')
+def str_data7():
+    text_show.set('7')
+def str_data8():
+    text_show.set('8')
+def str_data9():
+    text_show.set('9')
+def str_data0():
+    text_show.set('0')
+
+date1=Button(calcu,text='1',command=str_data1,font=('微软雅黑,30'))
+date1.place(x=10,y=50,width=50,height=50)
+date2=Button(calcu,text='2',command=str_data2,font=('微软雅黑,30'))
+date2.place(x=60,y=50,width=50,height=50)
+date3=Button(calcu,text='3',command=str_data3,font=('微软雅黑,30'))
+date3.place(x=110,y=50,width=50,height=50)
+date4=Button(calcu,text='4',command=str_data4,font=('微软雅黑,30'))
+date4.place(x=10,y=100,width=50,height=50)
+date5=Button(calcu,text='5',command=str_data5,font=('微软雅黑,30'))
+date5.place(x=60,y=100,width=50,height=50)
+date6=Button(calcu,text='6',command=str_data6,font=('微软雅黑,30'))
+date6.place(x=110,y=100,width=50,height=50)
+date7=Button(calcu,text='7',command=str_data7,font=('微软雅黑,30'))
+date7.place(x=10,y=150,width=50,height=50)
+date8=Button(calcu,text='8',command=str_data8,font=('微软雅黑,30'))
+date8.place(x=60,y=150,width=50,height=50)
+date9=Button(calcu,text='9',command=str_data9,font=('微软雅黑,30'))
+date9.place(x=110,y=150,width=50,height=50)
+date0=Button(calcu,text='0',command=str_data0,font=('微软雅黑,30'))
+date0.place(x=10,y=200,width=150,height=50)
+
+#四则运算
+def arith_add():
+    a=cal_text.get()
+    data_num.append(a)
+    op[0]='+'
+def arith_sep():
+    a = cal_text.get()
+    data_num.append(a)
+    op[0]='-'
+def arith_mass():
+    a = cal_text.get()
+    data_num.append(a)
+    op[0]='*'
+def arith_exc():
+    a = cal_text.get()
+    data_num.append(a)
+    op[0]='/'
+def total():
+    b = cal_text.get()
+    data_num.append(b)
+    if(op[0]=='+'):
+        total_sum=int(data_num[0])+int(data_num[1])
+        text_show.set(total_sum)
+        data_num.clear()
+    elif(op[0]=='-'):
+        total_sum=int(data_num[0])-int(data_num[1])
+        text_show.set(total_sum)
+        data_num.clear()
+    elif(op[0]=='*'):
+        total_sum=int(data_num[0])*int(data_num[1])
+        text_show.set(total_sum)
+        data_num.clear()
+    else:
+        if(data_num[1]=='0'):#debug
+            c=messagebox.showinfo('提示','除数不能为0')
+            data_num.clear()
+        else:
+            total_sum=int(data_num[0])//int(data_num[1])
+            text_show.set(total_sum)
+            data_num.clear()
+
+#四则运算按钮
+caladd=Button(calcu,text='+',command=arith_add,font=('微软雅黑,30'))
+caladd.place(x=160,y=50,width=50,height=50)
+calsep=Button(calcu,text='-',command=arith_sep,font=('微软雅黑,30'))
+calsep.place(x=210,y=50,width=50,height=50)
+calmass=Button(calcu,text='*',command=arith_mass,font=('微软雅黑,30'))
+calmass.place(x=160,y=100,width=50,height=50)
+calexc=Button(calcu,text='/',command=arith_exc,font=('微软雅黑,30'))
+calexc.place(x=210,y=100,width=50,height=50)
+
+caltotal=Button(calcu,text='=',command=total)
+caltotal.place(x=160,y=150,width=100,height=100)
+
+#循环绘制
+calcu.mainloop()
